@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.3' apply false
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'com.diffplug.spotless' version '5.14.3'
-	id 'java'
+    id 'org.springframework.boot' version '2.6.3' apply false
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.diffplug.spotless' version '5.14.3'
+    id 'java'
 }
 
 group = 'com.example'
@@ -10,68 +10,68 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencyManagement {
-	imports {
-		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-	}
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 spotless {
-	java {
-		importOrder()
-		removeUnusedImports()
+    java {
+        importOrder()
+        removeUnusedImports()
 
-		googleJavaFormat('1.11.0').aosp()
-	}
+        googleJavaFormat('1.11.0').aosp()
+    }
 
-	groovyGradle {
-		target '**/*.gradle'
+    groovyGradle {
+        target '**/*.gradle'
 
-		greclipse()
+        greclipse()
 
-		indentWithSpaces()
-	}
+        indentWithSpaces()
+    }
 
-	json {
-		target '**/*.json'
+    json {
+        target '**/*.json'
 
-		eclipseWtp('json')
+        eclipseWtp('json')
 
-		indentWithSpaces()
-	}
+        indentWithSpaces()
+    }
 
-	format 'md', {
-		target '**/*.md'
+    format 'md', {
+        target '**/*.md'
 
-		indentWithSpaces(2)
-		endWithNewline()
-	}
+        indentWithSpaces(2)
+        endWithNewline()
+    }
 
-	format 'yaml', {
-		target  '**/*.yaml'
+    format 'yaml', {
+        target  '**/*.yaml'
 
-		trimTrailingWhitespace()
-		indentWithSpaces(2)
-		endWithNewline()
-	}
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
 
-	format 'dotfiles', {
-		target '.gitignore', '.gitattributes'
+    format 'dotfiles', {
+        target '.gitignore', '.gitattributes'
 
-		trimTrailingWhitespace()
-		indentWithSpaces(2)
-		endWithNewline()
-	}
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
 }
