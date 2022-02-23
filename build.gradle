@@ -77,3 +77,11 @@ spotless {
         endWithNewline()
     }
 }
+
+githook {
+    hooks {
+        'pre-commit' {
+            task = 'spotlessCheck sonarlintMain sonarlintTest'
+        }
+    }
+}
