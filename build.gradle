@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.6.3' apply false
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.diffplug.spotless' version '5.14.3'
 	id 'java'
 }
 
@@ -25,4 +26,52 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+spotless {
+	java {
+		importOrder()
+		removeUnusedImports()
+
+		googleJavaFormat('1.11.0').aosp()
+	}
+
+	groovyGradle {
+		target '**/*.gradle'
+
+		greclipse()
+
+		indentWithSpaces()
+	}
+
+	json {
+		target '**/*.json'
+
+		eclipseWtp('json')
+
+		indentWithSpaces()
+	}
+
+	format 'md', {
+		target '**/*.md'
+
+		indentWithSpaces(2)
+		endWithNewline()
+	}
+
+	format 'yaml', {
+		target  '**/*.yaml'
+
+		trimTrailingWhitespace()
+		indentWithSpaces(2)
+		endWithNewline()
+	}
+
+	format 'dotfiles', {
+		target '.gitignore', '.gitattributes'
+
+		trimTrailingWhitespace()
+		indentWithSpaces(2)
+		endWithNewline()
+	}
 }
