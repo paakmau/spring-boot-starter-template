@@ -6,6 +6,7 @@ plugins {
     id 'com.star-zero.gradle.githook' version '1.2.1'
     id 'ru.netris.commitlint' version '1.4.1'
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'com.example'
@@ -29,6 +30,24 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/paakmau/spring-boot-starter-template"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
 
 spotless {
